@@ -39,7 +39,8 @@
     "request": "2.69.0",
     "slate-irc": "0.8.1",
     "socket.io": "1.4.5",
-    "spdy": "3.2.3"
+    "spdy": "3.2.3",
+    "node-capnp": "git://github.com/kentonv/node-capnp.git#node4"
   },
   "devDependencies": {
     "chai": "3.5.0",

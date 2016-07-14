@@ -83,4 +83,10 @@ apt-get update
 # Actually install node
 apt-get install -qq nodejs git-core g++
 
+# Install capnproto
+apt-get install -y autoconf libtool
+git clone https://github.com/sandstorm-io/capnproto.git
+cd capnproto/c++ && ./setup-autotools.sh && autoreconf -i && ./configure
+make -j2 check && sudo make install
+
 exit 0
