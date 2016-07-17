@@ -5,6 +5,7 @@ var ClientManager = require("./clientManager");
 var express = require("express");
 var fs = require("fs");
 var io = require("socket.io");
+var bodyParser = require("body-parser");
 var Helper = require("./helper");
 var config = {};
 
@@ -36,6 +37,16 @@ module.exports = function(options) {
 			key: fs.readFileSync(https.key),
 			cert: fs.readFileSync(https.certificate)
 		}, app).listen(port, host);
+	}
+
+	if (process.env.SANDSTORM === "1") {
+		var Sandstorm = require("./sandstormCap");
+
+		app.use(bodyParser.json());
+		app.post("/caps", function(req, res) {
+			console.log("save cap");
+			Sandstorm.saveCap(req.body.token, req.body.descriptor);
+		});
 	}
 
 	if ((config.identd || {}).enable) {
